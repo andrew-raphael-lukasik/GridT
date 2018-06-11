@@ -1,4 +1,4 @@
-// Wrote by Andrew Raphael Lukasik 
+// Written by Andrew Raphael Lukasik 
 // https://twitter.com/andrewlukasik
 // MIT license
 using UnityEngine;
