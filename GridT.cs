@@ -3,16 +3,10 @@
 // MIT license
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
-
 using Unity.Collections;
 using Unity.Mathematics;
 //TODO: using Unity.Jobs;
-
-#if UNITY_EDITOR
-//using UnityEditor;
-#endif
 
 public class GridT <T> : ICollection, IEnumerable<T>
 {
