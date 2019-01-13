@@ -319,7 +319,7 @@ public class GridT <T> : ICollection, IEnumerable<T>
     /// Gets the surrounding field values
     /// </summary>
     /// <returns>
-    /// 8-bit long clockwise formatted bit values 
+    /// 8-bit clockwise-enumerated bit values 
     /// 7 0 1           [x-1,y+1]  [x,y+1]  [x+1,y+1]
     /// 6   2     ==    [x-1,y]     [x,y]     [x+1,y]
     /// 5 4 3           [x-1,y-1]  [x,y-1]  [x+1,y-1]
@@ -327,7 +327,7 @@ public class GridT <T> : ICollection, IEnumerable<T>
     /// </returns>
     public byte GetMarchingSquares ( int x , int y , System.Predicate<T> predicate )
     {
-        const byte zero = 0b_00000000;
+        const byte zero = 0b_0000_0000;
         byte result = zero;
 
         //out of bounds test:
@@ -337,18 +337,18 @@ public class GridT <T> : ICollection, IEnumerable<T>
         bool yMinus = y-1 >= 0;
 
         //top, down:
-        result |= yPlus && predicate( this[ x , y+1 ] ) ? (byte)0b_1000_0000 : zero;
-        result |= yMinus && predicate( this[ x , y-1 ] ) ? (byte)0b_0000_1000 : zero;
+        result |= yPlus && predicate( this[ x , y+1 ] ) ? (byte)0b_0000_0001 : zero;
+        result |= yMinus && predicate( this[ x , y-1 ] ) ? (byte)0b_0001_0000 : zero;
 
         //right side:
-        result |= xPlus && yPlus && predicate( this[ x+1 , y+1 ] ) ? (byte)0b_0100_0000 : zero;
-        result |= xPlus && predicate( this[ x+1 , y ] ) ? (byte)0b_0010_0000 : zero;
-        result |= xPlus && yMinus && predicate( this[ x+1 , y-1 ] ) ? (byte)0b_0001_0000 : zero;
+        result |= xPlus && yPlus && predicate( this[ x+1 , y+1 ] ) ? (byte)0b_0000_0010 : zero;
+        result |= xPlus && predicate( this[ x+1 , y ] ) ? (byte)0b_0000_0100 : zero;
+        result |= xPlus && yMinus && predicate( this[ x+1 , y-1 ] ) ? (byte)0b_0000_1000 : zero;
 
         //left side:
-        result |= xMinus && yPlus && predicate( this[ x-1 , y+1 ] ) ? (byte)0b_0000_0001 : zero;
-        result |= xMinus && predicate( this[ x-1 , y ] )==true ? (byte)0b_0000_0010 : zero;
-        result |= xMinus && yMinus && predicate( this[ x-1 , y-1 ] ) ? (byte)0b_0000_0100 : zero;
+        result |= xMinus && yPlus && predicate( this[ x-1 , y+1 ] ) ? (byte)0b_0010_0000 : zero;
+        result |= xMinus && predicate( this[ x-1 , y ] )==true ? (byte)0b_0000_0100 : zero;
+        result |= xMinus && yMinus && predicate( this[ x-1 , y-1 ] ) ? (byte)0b_1000_0000 : zero;
         
         return result;
     }
