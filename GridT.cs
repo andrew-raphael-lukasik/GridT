@@ -22,7 +22,7 @@ public class GridT <T> : ICollection, IEnumerable<T>
     [SerializeField] int _height;
     public int height { get { return _height; } }
 
-    public int Length { get { return _width*_height; } }
+    public int Length { get { return _width * _height; } }
 
 
     #endregion
@@ -30,7 +30,7 @@ public class GridT <T> : ICollection, IEnumerable<T>
 
     public GridT ( int width , int height )
     {
-        this._values = new T[width*height];
+        this._values = new T[ width * height ];
         this._width = width;
         this._height = height;
     }
@@ -235,9 +235,9 @@ public class GridT <T> : ICollection, IEnumerable<T>
     /// <summary>
     /// Converts 1d to 2d array index
     /// </summary>
-    public float2 Index1dTo2d ( int i )
+    public int2 Index1dTo2d ( int i )
     {
-        return new float2 { x = i%_width , y = i/_width };
+        return new int2 { x = i%_width , y = i/_width };
     }
 
     /// <summary> Determines whether index is valid for this grid ie. inside array bounds </summary>
@@ -247,18 +247,18 @@ public class GridT <T> : ICollection, IEnumerable<T>
     }
 
     /// <summary> Transforms local position to cell index </summary>
-    public bool LocalPointToIndex2d ( float3 localPoint , float spacing , out float2 result )
+    public bool LocalPointToIndex2d ( float3 localPoint , float spacing , out int2 result )
     {
         int x = (int)( ( localPoint.x+(float)_width*0.5f*spacing )/spacing );
         int z = (int)( ( localPoint.z+(float)_height*0.5f*spacing )/spacing );
         if( IsIndexValid( x , z ) )
         {
-            result = new float2( x , z );
+            result = new int2{ x = x , y = z };
             return true;
         }
         else
         {
-            result = new float2( -1f , -1f );
+            result = new int2{ x = -1 , y = -1 };
             return false;
         }
     }
@@ -276,7 +276,7 @@ public class GridT <T> : ICollection, IEnumerable<T>
     }
     public float3 IndexToLocalPoint ( int index1d , float spacing )
     {
-        float2 index2d = Index1dTo2d( index1d );
+        int2 index2d = Index1dTo2d( index1d );
         return new float3(
             ( index2d.x*spacing )+( -_width*spacing*0.5f )+( spacing*0.5f ) ,
             0f ,
