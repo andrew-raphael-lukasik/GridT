@@ -1,6 +1,3 @@
-// Written by Andrew Raphael Lukasik 
-// https://twitter.com/andrewlukasik
-// MIT license
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
