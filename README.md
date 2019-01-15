@@ -14,4 +14,5 @@ Features:
 - more
 
 TODO:
-- A*
+- Fill line (https://www.redblobgames.com/grids/line-drawing.html)
+- A* (https://www.redblobgames.com/pathfinding/a-star/introduction.html)
