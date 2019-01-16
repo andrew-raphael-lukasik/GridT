@@ -82,7 +82,10 @@ public class GridT <T> : ICollection, IEnumerable<T>
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator ()
     {
-        return _values.GetEnumerator() as IEnumerator<T>;
+        foreach( var item in _values )
+        {
+            yield return item;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator ()
